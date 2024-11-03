@@ -210,3 +210,51 @@ const pro : Product = {
 
 // call
 getData(pro);
+
+
+// ********************************************** OOPS ***********************************************************
+
+// --> Very same as C++, have public, private, protected keyword
+// --> derived class me super is required
+// --> class implements interface, class can implement multiple interfaces
+
+class Produc{
+
+    readonly id : string = String(Math.random()*100);;
+    name : string;
+    public city : string;
+    protected state : string;
+
+    constructor(id : string, name : string, city : string, state : string){
+        // this.id = id;  --> will give error becz id is an read only property
+        this.name = name;
+        this.city = city;
+        this.state = state;
+    }
+
+    getMyProduct = () : string => {
+        return this.id;
+    }
+
+    // getter --> must return
+    get getProduct() : string{ 
+        return this.state;
+    }
+
+    // setter --> must take I/P parameter
+    set changeProduct(val : string){
+        this.city = val;
+    }
+
+
+}
+
+const obj = new Produc("100", "Himanshu", "Nagpur", "Maharashtra");
+
+// getter
+console.log(obj.getMyProduct);
+
+// setter
+obj.changeProduct = "Rachi";
+
+
