@@ -176,3 +176,60 @@ type FuncType = ReturnType< typeof myfunc1>
 // InstanceType<Type>
 
 type r8 = InstanceType<typeof SampleClass>
+
+
+
+// ********************************************** GENERICS ********************************************
+
+const rec = <T>(n : T) : T => {
+
+    return n;
+
+}
+
+const v1 = rec(10);
+const v2 = rec("hello");
+const v3 = rec({"name" : "himanshu", "age" : 1});
+
+type persona = {
+  name : string, 
+  age : number
+}
+
+const per = {
+  name : "Himanshu",
+  age : 22
+}
+
+// Good way of calling
+const v4 = rec<persona>(per);
+
+
+// A most beautiful use case of filtering ele from array
+
+const arrs: persona[] = [
+  {
+    name : "abhi",
+    age : 109
+  },
+  {
+    name : "yoyo",
+    age : 109
+  },
+  {
+    name : "lolo",
+    age : 72
+  }
+]
+
+const filterByPeoples = <T, U extends keyof T>(
+  arr : T[],          // array of type (number, string, obj) that I will send
+  property : U,       // in our case, T is arrs, so U will be the key of arrs 
+  value : T[U]        // now key rkhke uska mapped value
+) => {
+  return arr.filter((item) => item[property] === value);
+}
+
+const filteredPeopleByName = filterByPeoples(arrs, "name", "abhi");    // 1 entry
+
+const filteredPeopleByAge = filterByPeoples(arrs, "age", 109);      // 2 entries
